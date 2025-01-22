@@ -1,13 +1,54 @@
 import React from 'react';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
 
-function FloatingInput({ type, placeholder, label, value, onChange }) {
+function FloatingInput({ type, label, value, onChange }) {
     return (
         <>
-            <FloatingLabel controlId="floatingPassword" label={label} className='' >
-                <Form.Control className='focus-ring' style={{--bs-focus-ring-color: "rgba(var(--bs-success-rgb), .25)"}} type={type} placeholder={placeholder} value={value} onChange={onChange} />
-            </FloatingLabel>
+            <div className="floatContainer">
+                <input className='fs-5 border border-1 border-light rounded-2' id='floatInput' type={type} value={value} onChange={onChange} required />
+                <label className='fs-5 text-light' htmlFor='floatInput'>{label}</label>
+            </div>
+            <style>
+                {`
+.floatContainer {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+}
+
+input {
+    position: absolute;
+    width: 100%;
+    outline: none;
+    line-height: 40px;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 2;
+}
+
+label {
+    position: absolute;
+    transition: 0.2s ease;
+    background: transparent;
+    z-index: 2;
+}
+
+input:focus,
+input:valid {
+    color: #66ff00;
+    border: 4px solid #66ff00;
+    z-index: 1;
+}
+
+input:focus+label,
+input:valid+label {
+    color: #66ff00;
+    height: 40px;
+    line-height: 40px;
+    transform: translate(-1px, -20px) scale(0.80);
+    z-index: 20;
+}
+                `}
+            </style>
         </>
     );
 }

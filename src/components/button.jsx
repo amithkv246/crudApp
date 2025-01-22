@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Button({value}) {
+function Button({ value, onClick }) {
   return (
     <>
-      <button type="button" class="btn btn-outline-light shadow-none">{value}</button>
+      <button type="button" class="btn btn-outline-light" onClick={onClick}>{value}</button>
     </>
   );
 }
