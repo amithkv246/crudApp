@@ -15,8 +15,6 @@ function ProtectedRoute({ children }) {
             navigate("/")
         }
     }, [isLoggedInVar]);
-    console.log(actProtectRoute);
-
 
     return actProtectRoute && <>{children}</>;
 }

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useId } from 'react';
 
 function FloatingInput({ type, label, value, onChange }) {
+    const id = useId()
     return (
         <>
-            <div className="floatContainer">
-                <input className='fs-5 border border-1 border-light rounded-2' id='floatInput' type={type} value={value} onChange={onChange} required />
-                <label className='fs-5 text-light' htmlFor='floatInput'>{label}</label>
+            <div className="floatContainer d-flex align-items-center">
+                <input className='border border-1 border-white rounded-2' id={id} type={type} value={value} onChange={onChange} required />
+                <label className='rounded-2' htmlFor={id}>{label}</label>
             </div>
             <style>
                 {`
@@ -18,34 +19,43 @@ function FloatingInput({ type, label, value, onChange }) {
 input {
     position: absolute;
     width: 100%;
-    outline: none;
     line-height: 40px;
+    outline: none;
     background: transparent;
-    transition: 0.1s ease;
+    transition: 0.2s ease;
     z-index: 2;
+    padding: 2px 10px;
+    font-size: 1.25rem;
 }
 
 label {
     position: absolute;
-    transition: 0.2s ease;
+    color: #FFFFFF;
     background: transparent;
-    z-index: 2;
+    font-weight: 400;
+    transition: 0.2s ease;
+    z-index: 3;
+    padding: 0px 10px;
+    font-size: 1.25rem;
 }
 
 input:focus,
 input:valid {
-    color: #66ff00;
-    border: 4px solid #66ff00;
+    color: #FFFFFF;
     z-index: 1;
+    padding: 4px 10px 0px;
 }
 
-input:focus+label,
-input:valid+label {
-    color: #66ff00;
-    height: 40px;
-    line-height: 40px;
-    transform: translate(-1px, -20px) scale(0.80);
-    z-index: 20;
+input:focus + label,
+input:valid + label {
+    color: #9FA6B2;
+    background-color: #FFFFFF;
+    font-weight: 800;
+    transform: translate(10px, -23px);
+    z-index: 4;
+    padding: 0px 5px;
+    line-height: 20px;
+    font-size: 0.62rem; 
 }
                 `}
             </style>
