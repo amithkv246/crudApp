@@ -4,8 +4,8 @@ import InputGroup from './inputGroup';
 function Navbar() {
     return (
         <>
-            <header>
-                <nav className='d-flex justify-content-between align-items-center p-3 bg-secondary-subtle' style={{height: "12vh"}}>
+            <header className='position-fixed top-0' style={{height: "12vh", width: "100%"}} >
+                <nav className='d-flex justify-content-between align-items-center p-3 bg-secondary-subtle'>
                     <div>
                         <h1 className='fw-bold'><span>OLX</span></h1>
                     </div>

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function CardCom() {
-    const [isFeatured, setIsFeatured] = useState(false)
+    const [isFeatured, setIsFeatured] = useState(true)
     return (
         <>
             <Card className={isFeatured ? "" : ""} style={{ width: '18rem', minHeight: '18rem' }}>

@@ -8,7 +8,7 @@ function HomePage() {
     <>
       <div>
         <Navbar />
-        <div className='container mt-3 mb-3 me-0 d-flex'>
+        <div className='d-flex' style={{ margin: "24vh 0px 0px 12vw" }}>
           <CardCom />
         </div>
         <FooterCom />
