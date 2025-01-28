@@ -5,13 +5,13 @@ import FooterCom from '../components/footerCom';
 function ProductDetailsPage() {
     return (
         <>
-            <div>
-                <Navbar />
-                <div className="" style={{ margin: "24vh 0vw 24vh 0vw" }}>
-                    <p>product details..........</p>
+            <Navbar />
+            <div className='bg-secondar' style={{ background: "linear-gradient(to bottom right, #5A6268, #6C757D)", padding: "24vh 0vw" }}>
+                <div className='d-flex flex-column gap-5' style={{ marginLeft: "12vw" }}>
+                    <p>Product Details....</p>
                 </div>
-                <FooterCom />
             </div>
+            <FooterCom />
         </>
     );
 }

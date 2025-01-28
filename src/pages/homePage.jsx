@@ -8,13 +8,13 @@ function HomePage() {
   const navigate = useNavigate()
   return (
     <>
-      <div>
-        <Navbar />
-        <div className='d-flex' style={{ margin: "24vh 0vw 24vh 12vw" }}>
+      <Navbar />
+      <div className='bg-secondar' style={{ background: "linear-gradient(to bottom right, #5A6268, #6C757D)", padding: "24vh 0vw" }}>
+        <div className='d-flex flex-column gap-5' style={{ marginLeft: "12vw" }}>
           <CardCom onClick={() => navigate("/product_details")} />
         </div>
-        <FooterCom />
       </div>
+      <FooterCom />
     </>
   );
 }

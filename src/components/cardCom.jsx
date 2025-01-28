@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router';
 
-function CardCom({ onClick }) {
+function CardCom({ onClick, handleAddToWishlist }) {
     const [isFeatured, setIsFeatured] = useState(false)
     const navigate = useNavigate()
     return (
@@ -15,6 +15,8 @@ function CardCom({ onClick }) {
                         isFeatured &&
                         <div className='cardFeatured bg-warning rounded-1 fw-light' style={{ fontSize: "small", padding: "1px 10px" }}>FEATURED</div>
                     }
+                    <div role='button' onClick={handleAddToWishlist} className={isFeatured ? "cardWish bg-white p-2 rounded-5 mt-1" : "cardWish bg-white p-2 rounded-5"}><i className="fa-regular fa-heart fa-xl text-secondary"></i></div>
+                    {/* <i class="fa-solid fa-heart fa-xl text-secondary"></i> //wishbutton onclick */}
                 </div>
                 <Card.Body className={isFeatured ? "p-0 ps-2 bg-warning rounded-bottom-1" : "p-0"}>
                     <div className={isFeatured ? "d-flex flex-column gap-1 bg-white p-3 pt-1 pb-1" : "d-flex flex-column gap-1 p-3 pt-1 pb-1"} style={{ borderRadius: "0px 0px 0.2rem 0.2rem" }}>
@@ -43,6 +45,12 @@ function CardCom({ onClick }) {
                     bottom: 1%;
                     left: 5%;
                     line-height: 20px;
+                }
+                
+                .cardWish {
+                    position: absolute;
+                    top: 5%;
+                    right: 5%;
                 }
                 `}
             </style>
