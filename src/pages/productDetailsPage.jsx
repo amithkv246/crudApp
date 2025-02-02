@@ -21,7 +21,7 @@ function ProductDetailsPage() {
                             </div>
                         </div>
                         <div className='d-flex flex-column bg-white rounded-2 ' style={{ boxShadow: "0px 0px 5px 2px #aaa" }}>
-                            <p className="fs-3 text-secondary fw-bold border-bottom border-2 border-secondary px-4 py-2">Overview</p>
+                            <p className="fs-3 text-secondary fw-bold border-bottom border-2 border-secondary-subtle px-4 py-2">Overview</p>
                             <div className='d-flex flex-row justify-content-start ps-4 pb-1 gap-5 fs-5'>
                                 <p className='d-flex flex-row align-items-center gap-3 me-5'>
                                     <i className="fa-regular fa-user fa-xl"></i>
@@ -41,7 +41,7 @@ function ProductDetailsPage() {
                             </div>
                         </div>
                         <div className='d-flex flex-column bg-white rounded-2' style={{ boxShadow: "0px 0px 5px 2px #aaa" }}>
-                            <p className="fs-3 text-secondary fw-bold border-bottom border-2 border-secondary px-4 py-2 mb-0">Description</p>
+                            <p className="fs-3 text-secondary fw-bold border-bottom border-2 border-secondary-subtle px-4 py-2 mb-0">Description</p>
                             <p className='p-4'>
                                 HONDA CITY ZX<br />
                                 TOP MODEL,AUTOMATIC WITH SUNROOF<br />
