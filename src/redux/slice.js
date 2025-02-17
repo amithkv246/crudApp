@@ -2,9 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     isLoggedIn: false,
-    loginPassword: "",
-    registerPassword: "",
-    registerConPass: "",
 }
 
 export const counterSlice = createSlice({
@@ -13,19 +10,10 @@ export const counterSlice = createSlice({
     reducers: {
         updateIsLoggedIn: (state, action) => {
             state.isLoggedIn = action.payload
-        },
-        updateLoginPassword: (state, action) => {
-            state.loginPassword = action.payload
-        },
-        updateRegisterPassword: (state, action) => {
-            state.registerPassword = action.payload
-        },
-        updateRegisterConPass: (state, action) => {
-            state.registerConPass = action.payload
-        },
+        }
     },
 })
 
-export const { updateIsLoggedIn, updateLoginPassword, updateRegisterPassword, updateRegisterConPass } = counterSlice.actions
+export const { updateIsLoggedIn } = counterSlice.actions
 
 export default counterSlice.reducer
