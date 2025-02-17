@@ -70,9 +70,10 @@ function LoginPage() {
     }
   }
 
-  const handleLogin = (token) => {
-    sessionStorage.setItem('token', JSON.stringify(token))
-    localStorage.setItem('userCredentials', JSON.stringify(loginCredentials))
+  const handleLogin = (result) => {
+    const dbLoginCredentials = { email: result.data.userDetails.email, password: result.data.userDetails.password }
+    sessionStorage.setItem('token', JSON.stringify(result.data.token))
+    localStorage.setItem('userCredentials', JSON.stringify(dbLoginCredentials))
     dispatch(updateIsLoggedIn(true))
     navigate("/home")
   }
@@ -86,10 +87,9 @@ function LoginPage() {
       const data = { email: loginCredentials.email, password: loginCredentials.password };
       try {
         const result = await loginAPI(data)
-        const token = result.data.token
         if (result.status === 200) {
           alert("Login Successful")
-          handleLogin(token)
+          handleLogin(result)
           setLoginCredentials((prev) => ({ ...prev, email: "", password: "" }))
         } else if (result.status === 406) {
           alert("Invalid Email Id or Password")
