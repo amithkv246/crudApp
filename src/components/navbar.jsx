@@ -2,6 +2,7 @@ import React from 'react';
 import InputGroup from './inputGroup';
 import SelectCom from './select';
 import { useNavigate } from 'react-router';
+import SplitButton from './splitbutton';
 
 function Navbar() {
     const navigate = useNavigate()
@@ -28,7 +29,7 @@ function Navbar() {
                         <i className="fa-regular fa-comment fa-xl"></i>
                     </div>
                     <div>
-                        <button className='iconButton btn btn-light btn-lg fw-bold' style={{ color: "#6C757D", border: "1px solid #800000", color: "#6C757D", backgroundColor: "#F5F5F5" }}>login</button>
+                        <SplitButton value={"Profile"} option={"Logout"} />
                     </div>
                     <div>
                         <button className='iconButton btn btn-light btn-lg fw-bold' style={{ color: "#6C757D", border: "1px solid #800000", color: "#6C757D", backgroundColor: "#F5F5F5" }}>sell</button>

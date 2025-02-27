@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FloatingInput from '../components/floatingInput';
 import Button from '../components/button';
 import Heading1 from '../components/heading1';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateIsLoggedIn } from '../redux/slice';
-import { loginAPI } from '../APIServices/allAPI\'s/registerAPI';
+import { loginAPI } from '../APIServices/allAPI\'s/loginAPI';
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -71,8 +71,12 @@ function LoginPage() {
   }
 
   const handleLogin = (result) => {
-    const dbLoginCredentials = { email: result.data.userDetails.email, password: result.data.userDetails.password }
-    sessionStorage.setItem('token', JSON.stringify(result.data.token))
+    const dbLoginCredentials = {
+      name: result.data.userDetails.name,
+      email: result.data.userDetails.email,
+      password: result.data.userDetails.password,
+      token: result.data.token
+    }
     localStorage.setItem('userCredentials', JSON.stringify(dbLoginCredentials))
     dispatch(updateIsLoggedIn(true))
     navigate("/home")

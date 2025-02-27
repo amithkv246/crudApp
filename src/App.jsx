@@ -4,6 +4,8 @@ import RegisterPage from "./pages/registerPage";
 import ProtectedRoute from "./provider/protectedRoute";
 import HomePage from "./pages/homePage";
 import ProductDetailsPage from "./pages/productDetailsPage";
+import ProfilePage from "./pages/profilePage";
+import AdFormPage from "./pages/adFormPage";
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
         <Route path="/product_details" element={<ProductDetailsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/ad_form" element={<AdFormPage />} />
       </Routes>
     </>
   )
