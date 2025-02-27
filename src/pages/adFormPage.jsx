@@ -3,6 +3,7 @@ import InputCom from '../components/adFormComponents/inputCom'
 import SelectBrand from '../components/adFormComponents/selectBrand';
 import RadioButtonCom from '../components/adFormComponents/radioButtonCom';
 import { useNavigate } from 'react-router-dom';
+import { adPostAPI } from '../APIServices/allAPI\'s/adPostAPI.JS';
 
 function AdFormPage() {
     const navigate = useNavigate()
@@ -27,12 +28,22 @@ function AdFormPage() {
         setImages(images.filter((_, i) => i !== index));
     };
 
-    const fileUpload = (event) => {
+    const fileUpload = async (event) => {
         event.preventDefault()
-        const requestBody = new FormData()
-        requestBody.append("brand", formData.brand)
-        requestBody.append("images", images)
-        console.log(...requestBody);
+        const reqBody = new FormData()
+        reqBody.append("brand", formData.brand)
+        reqBody.append("images", images)
+        const userCredentials = JSON.parse(localStorage.getItem("userCredentials"))
+        const reqHeader = {
+            "Content-type": "multipart/form-data",
+            "Authorization": `${userCredentials.token}`
+        }
+        try {
+            const result = await adPostAPI(reqBody, reqHeader)
+            console.log("Result" + result);
+        } catch (error) {
+            return error
+        }
     }
 
     return (
@@ -48,7 +59,7 @@ function AdFormPage() {
                     <h2>POST YOUR AD</h2>
                 </div>
                 <div className='d-flex justify-content-center align-items-center'>
-                    <form className='border border-1 border-secondary border-opacity-50 w-50' style={{ minHeight: "30rem" }} >
+                    <form onSubmit={fileUpload} className='border border-1 border-secondary border-opacity-50 w-50' style={{ minHeight: "30rem" }} >
                         <div className='d-flex flex-column gap-3 p-4 border-bottom border-1 border-secondary border-opacity-50'>
                             <h4>INCLUDE SOME DETAILS</h4>
                             <div>
@@ -109,22 +120,21 @@ function AdFormPage() {
                             <p className='mb-0 mt-2'>Add a photo*</p>
                             {/* <i class="fa-solid fa-image fa-2xl"></i> */}
                             <input id='imgUploadBtn' type={'file'} accept="image/*" multiple onChange={handleFileChange} style={{ display: "none" }} />
-                            <div className='d-flex'>
+
+                            <div className='p-2 pt-3 d-flex flex-row flex-wrap gap-2'>
                                 <label htmlFor="imgUploadBtn" className='d-flex align-items-center justify-content-center border border-1 border-black' style={{ height: "100px", width: "100px" }}>
-                                    <i class="fa-solid fa-plus" style={{ fontSize: "3rem" }}></i>
+                                    <i className="fa-solid fa-plus" style={{ fontSize: "3rem" }}></i>
                                 </label>
-                                <div className='p-2 pt-3 d-flex flex-row flex-wrap gap-2'>
-                                    {
-                                        images.map((item, index) => (
-                                            <div key={"image" + index} style={{ height: "100px", width: "100px", position: 'relative' }}>
-                                                <img src={item.url} alt="img" style={{ height: "100%", width: "100%", objectFit: 'contain' }} />
-                                                <p className='rounded-5 mb-0 px-2' role='button' onClick={() => removeImage(index)} style={{ position: "absolute", top: "5px", right: "5px", background: "red", color: "white", border: "none", cursor: "pointer" }}>
-                                                    <i className="fa-solid fa-xmark fa-2xs"></i>
-                                                </p>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
+                                {
+                                    images.map((item, index) => (
+                                        <div key={"image" + index} style={{ height: "100px", width: "100px", position: 'relative' }}>
+                                            <img src={item.url} alt="img" style={{ height: "100%", width: "100%", objectFit: 'contain' }} />
+                                            <p className='rounded-5 mb-0 px-2' role='button' onClick={() => removeImage(index)} style={{ position: "absolute", top: "5px", right: "5px", background: "red", color: "white", border: "none", cursor: "pointer" }}>
+                                                <i className="fa-solid fa-xmark fa-2xs"></i>
+                                            </p>
+                                        </div>
+                                    ))
+                                }
                             </div>
                         </div>
                         <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
@@ -133,7 +143,7 @@ function AdFormPage() {
                             <SelectBrand opt1={'Kerala'} opt2={'Tamil Nadu'} opt3={'Karnataka'} opt4={'Andhra Pradesh'} />
                         </div>
                         <div className='p-4'>
-                            <button className="fs-5 btn btn-outline-secondary" onClick={fileUpload}>Post now</button>
+                            <button type='submit' className="fs-5 btn btn-outline-secondary">Post now</button>
                         </div>
                     </form>
                 </div>
