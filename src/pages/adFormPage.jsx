@@ -7,7 +7,6 @@ import { adPostAPI } from '../APIServices/allAPI\'s/adPostAPI.JS';
 
 function AdFormPage() {
     const navigate = useNavigate()
-    const [images, setImages] = useState([])
     const [formData, setFormData] = useState({
         brand: "",
         images: []
@@ -16,7 +15,7 @@ function AdFormPage() {
 
     const handleFileChange = (event) => {
         const files = Array.from(event.target.files);
-        if (images.length + files.length > maxImages) {
+        if (formData.images.length + files.length > maxImages) {
             alert(`You can only upload up to ${maxImages} images.`);
             return;
         }
@@ -27,6 +26,22 @@ function AdFormPage() {
     const removeImage = (index) => {
         setImages(images.filter((_, i) => i !== index));
     };
+
+    // const handleFileChange = (event) => {
+    //     const file = event.target.files[0]; // Get the first file (only one file can be selected)
+
+    //     // Check if a file was selected
+    //     if (!file) {
+    //         alert("No file selected");
+    //         return;
+    //     }
+
+    //     // Create an object URL for the selected file for preview purposes
+    //     // const newFile = { file, url: URL.createObjectURL(file) };
+
+    //     // Update the state with the new file
+    //     setImages(file); // Overwrite previous image state with the new one (since only one file)
+    // };
 
     const fileUpload = async (event) => {
         event.preventDefault()
@@ -40,9 +55,9 @@ function AdFormPage() {
         }
         try {
             const result = await adPostAPI(reqBody, reqHeader)
-            console.log("Result" + result);
-        } catch (error) {
-            return error
+            console.log("Result : " + result);
+        } catch (err) {
+            console.error(err)
         }
     }
 
@@ -129,7 +144,7 @@ function AdFormPage() {
                                     images.map((item, index) => (
                                         <div key={"image" + index} style={{ height: "100px", width: "100px", position: 'relative' }}>
                                             <img src={item.url} alt="img" style={{ height: "100%", width: "100%", objectFit: 'contain' }} />
-                                            <p className='rounded-5 mb-0 px-2' role='button' onClick={() => removeImage(index)} style={{ position: "absolute", top: "5px", right: "5px", background: "red", color: "white", border: "none", cursor: "pointer" }}>
+                                            <p className='rounded-5 mb-0 px-2' role='button' onClick={() => removeImage(index)} style={{ position: "absolute", top: "5px", right: "5px", background: "red", color: "white", border: "none" }}>
                                                 <i className="fa-solid fa-xmark fa-2xs"></i>
                                             </p>
                                         </div>
