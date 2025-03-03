@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InputCom from '../components/adFormComponents/inputCom'
-import SelectBrand from '../components/adFormComponents/selectBrand';
+import SelectBrandLoc from '../components/adFormComponents/selectBrandLoc';
 import RadioButtonCom from '../components/adFormComponents/radioButtonCom';
 import { useNavigate } from 'react-router-dom';
 import { adPostAPI } from '../APIServices/allAPI\'s/adPostAPI.JS';
@@ -9,45 +9,47 @@ function AdFormPage() {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         brand: "",
-        images: []
+        year: "",
+        fuel: "",
+        transmission: "",
+        kmDriven: "",
+        noOfOwners: "",
+        adTitle: "",
+        description: "",
+        price: "",
+        images: [],
+        location: ""
     })
-    const maxImages = 20
 
-    const handleFileChange = (event) => {
-        const files = Array.from(event.target.files);
+    const maxImages = 20
+    const handleFileChange = (e) => {
+        const files = Array.from(e.target.files);
         if (formData.images.length + files.length > maxImages) {
             alert(`You can only upload up to ${maxImages} images.`);
             return;
         }
-        const newImages = files.map((file) => ({ file, url: URL.createObjectURL(file), }));
-        setImages((prev) => [...prev, ...newImages]);
+        const newFiles = files.map((file) => ({ file, url: URL.createObjectURL(file), }));
+        setFormData((prev) => ({
+            ...prev,
+            images: [...prev.images, ...newFiles]
+        }))
     }
 
     const removeImage = (index) => {
-        setImages(images.filter((_, i) => i !== index));
+        const newArray = formData.images.filter((_, i) => i !== index)
+        setFormData((prev) => ({
+            ...prev,
+            images: newArray
+        }))
     };
-
-    // const handleFileChange = (event) => {
-    //     const file = event.target.files[0]; // Get the first file (only one file can be selected)
-
-    //     // Check if a file was selected
-    //     if (!file) {
-    //         alert("No file selected");
-    //         return;
-    //     }
-
-    //     // Create an object URL for the selected file for preview purposes
-    //     // const newFile = { file, url: URL.createObjectURL(file) };
-
-    //     // Update the state with the new file
-    //     setImages(file); // Overwrite previous image state with the new one (since only one file)
-    // };
 
     const fileUpload = async (event) => {
         event.preventDefault()
         const reqBody = new FormData()
         reqBody.append("brand", formData.brand)
-        reqBody.append("images", images)
+        formData.images.forEach((image) => {
+            reqBody.append("images", image.file);
+        });
         const userCredentials = JSON.parse(localStorage.getItem("userCredentials"))
         const reqHeader = {
             "Content-type": "multipart/form-data",
@@ -60,6 +62,50 @@ function AdFormPage() {
             console.error(err)
         }
     }
+
+    const handleBrandChange = (e) => {
+        setFormData((prev) => ({ ...prev, brand: e.target.value }))
+    }
+
+    const handleYearChange = (e) => {
+        setFormData((prev) => ({ ...prev, year: e.target.value }))
+    }
+
+    const handleFuelChange = (e) => {
+        setFormData((prev) => ({ ...prev, fuel: e.target.value }))
+    }
+
+    const handleTransmissionChange = (e) => {
+        setFormData((prev) => ({ ...prev, transmission: e.target.value }))
+    }
+
+    const handleKMDrivenChange = (e) => {
+        setFormData((prev) => ({ ...prev, kmDriven: e.target.value }))
+    }
+
+    const handleNoOfOwnersChange = (e) => {
+        setFormData((prev) => ({ ...prev, noOfOwners: e.target.value }))
+    }
+
+    const handleAdTitleChange = (e) => {
+        setFormData((prev) => ({ ...prev, adTitle: e.target.value }))
+    }
+
+    const handleDescriptionChange = (e) => {
+        setFormData((prev) => ({ ...prev, description: e.target.value }))
+    }
+
+    const handlePriceChange = (e) => {
+        setFormData((prev) => ({ ...prev, price: e.target.value }))
+    }
+
+    const handleLocationChange = (e) => {
+        setFormData((prev) => ({ ...prev, location: e.target.value }))
+    }
+
+    useEffect(() => {
+        console.log("Test: ", formData);
+    }, [formData])
 
     return (
         <>
@@ -79,16 +125,16 @@ function AdFormPage() {
                             <h4>INCLUDE SOME DETAILS</h4>
                             <div>
                                 <p className='mb-0 mt-2'>Brand*</p>
-                                <SelectBrand opt1={'Maruthi Suzuki'} opt2={'Hyundai'} opt3={'Tata'} opt4={'Mahindra'} onChange={(e) => setFormData((prev) => ({ ...prev, brand: e.target.value }))} />
+                                <SelectBrandLoc options={['Maruthi Suzuki', 'Hyundai', 'Tata', 'Mahindra']} onChange={(e) => handleBrandChange(e)} />
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Year*</p>
-                                <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} />
+                                <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handleYearChange(e)} />
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Fuel*</p>
                                 <div className='d-flex flex-row gap-1'>
-                                    <RadioButtonCom value={'CNG & Hybrids'} />
+                                    <RadioButtonCom value={'CNG & Hybrids'} onChange={(e) => handleFuelChange(e)} />
                                     <RadioButtonCom value={'Diesel'} />
                                     <RadioButtonCom value={'Petrol'} />
                                     <RadioButtonCom value={'Electric'} />
@@ -104,7 +150,7 @@ function AdFormPage() {
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>KM driven*</p>
-                                <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} />
+                                <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handleKMDrivenChange(e)} />
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>No. of owners*</p>
@@ -118,17 +164,17 @@ function AdFormPage() {
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Ad title*</p>
-                                <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} />
+                                <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handleAdTitleChange(e)} />
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Description*</p>
-                                <textarea className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} />
+                                <textarea className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3 border-secondary'} onChange={(e) => handleDescriptionChange(e)} />
                             </div>
                         </div>
                         <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
                             <h4>SET A PRICE</h4>
                             <p className='mb-0 mt-2'>Price*</p>
-                            <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} />
+                            <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handlePriceChange(e)} />
                         </div>
                         <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
                             <h4>UPLOAD UPTO 20 PHOTOS</h4>
@@ -141,7 +187,7 @@ function AdFormPage() {
                                     <i className="fa-solid fa-plus" style={{ fontSize: "3rem" }}></i>
                                 </label>
                                 {
-                                    images.map((item, index) => (
+                                    formData.images.map((item, index) => (
                                         <div key={"image" + index} style={{ height: "100px", width: "100px", position: 'relative' }}>
                                             <img src={item.url} alt="img" style={{ height: "100%", width: "100%", objectFit: 'contain' }} />
                                             <p className='rounded-5 mb-0 px-2' role='button' onClick={() => removeImage(index)} style={{ position: "absolute", top: "5px", right: "5px", background: "red", color: "white", border: "none" }}>
@@ -155,10 +201,10 @@ function AdFormPage() {
                         <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
                             <h4>CONFIRM YOUR LOCATION</h4>
                             <p className='mb-0 mt-2'>State*</p>
-                            <SelectBrand opt1={'Kerala'} opt2={'Tamil Nadu'} opt3={'Karnataka'} opt4={'Andhra Pradesh'} />
+                            <SelectBrandLoc options={['Kerala', 'Tamil Nadu', 'Karnataka', 'Andra Pradesh']} onChange={(e) => handleLocationChange(e)} />
                         </div>
                         <div className='p-4'>
-                            <button type='submit' className="fs-5 btn btn-outline-secondary">Post now</button>
+                            <button type='submit' className="fs-5 fw-bold btn btn-outline-secondary text-secondary">Post now</button>
                         </div>
                     </form>
                 </div>
