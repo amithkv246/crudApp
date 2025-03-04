@@ -1,10 +1,10 @@
 import React, { useId } from 'react';
 
-function RadioButtonCom({ value, onChange }) {
+function RadioButtonCom({ value, name, onChange }) {
   const id = useId()
   return (
     <>
-      <input type="checkbox" className="btn-check" id={id} autoComplete="off" onChange={(e) => onChange(e)} />
+      <input type="radio" name={name} className="btn-check" id={id} autoComplete="off" onChange={() => onChange(value)} />
       <label className="btn btn-outline-secondary" htmlFor={id}>{value}</label>
     </>
   );

@@ -45,19 +45,30 @@ function AdFormPage() {
 
     const fileUpload = async (event) => {
         event.preventDefault()
+        const userCredentials = JSON.parse(localStorage.getItem("userCredentials"))
         const reqBody = new FormData()
+        reqBody.append("userId", userCredentials.userId)
         reqBody.append("brand", formData.brand)
+        reqBody.append("year", formData.year)
+        reqBody.append("fuel", formData.fuel)
+        reqBody.append("transmission", formData.transmission);
+        reqBody.append("kmDriven", formData.kmDriven);
+        reqBody.append("noOfOwners", formData.noOfOwners);
+        reqBody.append("adTitle", formData.adTitle);
+        reqBody.append("description", formData.description);
+        reqBody.append("price", formData.price);
         formData.images.forEach((image) => {
             reqBody.append("images", image.file);
         });
-        const userCredentials = JSON.parse(localStorage.getItem("userCredentials"))
+        reqBody.append("location", formData.location);
+
         const reqHeader = {
             "Content-type": "multipart/form-data",
             "Authorization": `${userCredentials.token}`
         }
         try {
             const result = await adPostAPI(reqBody, reqHeader)
-            console.log("Result : " + result);
+            console.log("Result : ", result);
         } catch (err) {
             console.error(err)
         }
@@ -71,20 +82,20 @@ function AdFormPage() {
         setFormData((prev) => ({ ...prev, year: e.target.value }))
     }
 
-    const handleFuelChange = (e) => {
-        setFormData((prev) => ({ ...prev, fuel: e.target.value }))
+    const handleFuelChange = (value) => {
+        setFormData((prev) => ({ ...prev, fuel: value }))
     }
 
-    const handleTransmissionChange = (e) => {
-        setFormData((prev) => ({ ...prev, transmission: e.target.value }))
+    const handleTransmissionChange = (value) => {
+        setFormData((prev) => ({ ...prev, transmission: value }))
     }
 
     const handleKMDrivenChange = (e) => {
         setFormData((prev) => ({ ...prev, kmDriven: e.target.value }))
     }
 
-    const handleNoOfOwnersChange = (e) => {
-        setFormData((prev) => ({ ...prev, noOfOwners: e.target.value }))
+    const handleNoOfOwnersChange = (value) => {
+        setFormData((prev) => ({ ...prev, noOfOwners: value }))
     }
 
     const handleAdTitleChange = (e) => {
@@ -103,9 +114,9 @@ function AdFormPage() {
         setFormData((prev) => ({ ...prev, location: e.target.value }))
     }
 
-    useEffect(() => {
-        console.log("Test: ", formData);
-    }, [formData])
+    // useEffect(() => {
+    //     console.log("test: ", formData);
+    // }, [formData])
 
     return (
         <>
@@ -134,18 +145,18 @@ function AdFormPage() {
                             <div>
                                 <p className='mb-0 mt-2'>Fuel*</p>
                                 <div className='d-flex flex-row gap-1'>
-                                    <RadioButtonCom value={'CNG & Hybrids'} onChange={(e) => handleFuelChange(e)} />
-                                    <RadioButtonCom value={'Diesel'} />
-                                    <RadioButtonCom value={'Petrol'} />
-                                    <RadioButtonCom value={'Electric'} />
-                                    <RadioButtonCom value={'LPG'} />
+                                    <RadioButtonCom value={'CNG & Hybrids'} name={'fuel'} onChange={handleFuelChange} />
+                                    <RadioButtonCom value={'Diesel'} name={'fuel'} onChange={handleFuelChange} />
+                                    <RadioButtonCom value={'Petrol'} name={'fuel'} onChange={handleFuelChange} />
+                                    <RadioButtonCom value={'Electric'} name={'fuel'} onChange={handleFuelChange} />
+                                    <RadioButtonCom value={'LPG'} name={'fuel'} onChange={handleFuelChange} />
                                 </div>
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Transmission*</p>
                                 <div className='d-flex flex-row gap-1'>
-                                    <RadioButtonCom value={'Automatic'} />
-                                    <RadioButtonCom value={'Manual'} />
+                                    <RadioButtonCom value={'Automatic'} name={'transmission'} onChange={handleTransmissionChange} />
+                                    <RadioButtonCom value={'Manual'} name={'transmission'} onChange={handleTransmissionChange} />
                                 </div>
                             </div>
                             <div>
@@ -155,11 +166,11 @@ function AdFormPage() {
                             <div>
                                 <p className='mb-0 mt-2'>No. of owners*</p>
                                 <div className='d-flex flex-row gap-1'>
-                                    <RadioButtonCom value={'1st'} />
-                                    <RadioButtonCom value={'2nd'} />
-                                    <RadioButtonCom value={'3rd'} />
-                                    <RadioButtonCom value={'4th'} />
-                                    <RadioButtonCom value={'4+'} />
+                                    <RadioButtonCom value={'1st'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
+                                    <RadioButtonCom value={'2nd'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
+                                    <RadioButtonCom value={'3rd'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
+                                    <RadioButtonCom value={'4th'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
+                                    <RadioButtonCom value={'4+'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
                                 </div>
                             </div>
                             <div>
@@ -184,7 +195,7 @@ function AdFormPage() {
 
                             <div className='p-2 pt-3 d-flex flex-row flex-wrap gap-2'>
                                 <label htmlFor="imgUploadBtn" className='d-flex align-items-center justify-content-center border border-1 border-black' style={{ height: "100px", width: "100px" }}>
-                                    <i className="fa-solid fa-plus" style={{ fontSize: "3rem" }}></i>
+                                    <i className="fa-solid fa-plus fa-2xl"></i>
                                 </label>
                                 {
                                     formData.images.map((item, index) => (

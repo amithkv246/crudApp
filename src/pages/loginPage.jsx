@@ -72,6 +72,7 @@ function LoginPage() {
 
   const handleLogin = (result) => {
     const dbLoginCredentials = {
+      userId: result.data.userDetails.userId,
       name: result.data.userDetails.name,
       email: result.data.userDetails.email,
       password: result.data.userDetails.password,
@@ -108,12 +109,6 @@ function LoginPage() {
       }
     }
   }
-
-  // const handleLogout = () => {
-  //     localStorage.removeItem('userCredentials');
-  //     dispatch(updateIsLoggedIn(false)); // Update Redux state
-  //     navigate("/");
-  // };
 
   return (
     <>
