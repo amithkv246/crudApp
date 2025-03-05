@@ -1,11 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useNavigate } from 'react-router-dom';
 
 function SplitButton({ value, option, onOptionClick }) {
+    const navigate = useNavigate()
     return (
         <Dropdown as={ButtonGroup}>
-            <Button className='iconButton btn btn-light btn-lg fw-bold' style={{ color: "#6C757D", border: "1px solid #800000", color: "#6C757D", backgroundColor: "#F5F5F5", borderRight: "0px" }}>
+            <Button className='iconButton btn btn-light btn-lg fw-bold' onClick={() => navigate("/profile")} style={{ color: "#6C757D", border: "1px solid #800000", color: "#6C757D", backgroundColor: "#F5F5F5", borderRight: "0px" }}>
                 {value}
             </Button>
             <Dropdown.Toggle split id="dropdown-split-basic" className='iconButton btn btn-light btn-lg fw-bold' style={{ color: "#6C757D", border: "1px solid #800000", color: "#6C757D", backgroundColor: "#F5F5F5", borderLeft: "0px" }} />

@@ -32,7 +32,7 @@ function Navbar({ onOptionClick }) {
                         <SplitButton value={"Profile"} option={"Logout"} onOptionClick={onOptionClick} />
                     </div>
                     <div>
-                        <button className='iconButton btn btn-light btn-lg fw-bold' style={{ color: "#6C757D", border: "1px solid #800000", color: "#6C757D", backgroundColor: "#F5F5F5" }}>sell</button>
+                        <button onClick={() => navigate("/ad_form")} className='iconButton btn btn-light btn-lg fw-bold' style={{ color: "#6C757D", border: "1px solid #800000", color: "#6C757D", backgroundColor: "#F5F5F5" }}>sell</button>
                     </div>
                 </nav>
             </header>

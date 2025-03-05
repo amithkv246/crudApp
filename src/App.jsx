@@ -6,6 +6,7 @@ import HomePage from "./pages/homePage";
 import ProductDetailsPage from "./pages/productDetailsPage";
 import ProfilePage from "./pages/profilePage";
 import AdFormPage from "./pages/adFormPage";
+import EditProfilePage from "./pages/editProfilePage";
 
 function App() {
 
@@ -15,9 +16,10 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
-        <Route path="/product_details" element={<ProtectedRoute><ProductDetailsPage/></ProtectedRoute>} />
+        <Route path="/product_details" element={<ProtectedRoute><ProductDetailsPage /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
         <Route path="/ad_form" element={<ProtectedRoute><AdFormPage /></ProtectedRoute>} />
+        <Route path="/edit_profile" element={<ProtectedRoute><EditProfilePage /></ProtectedRoute>} />
       </Routes>
     </>
   )

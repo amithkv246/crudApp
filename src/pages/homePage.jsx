@@ -17,6 +17,10 @@ function HomePage() {
       navigate("/");
   };
 
+  // const handleProfile = () = {
+
+  // }
+
   return (
     <>
       <Navbar onOptionClick={handleLogout}/>
