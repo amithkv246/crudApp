@@ -136,7 +136,7 @@ function AdFormPage() {
                             <h4>INCLUDE SOME DETAILS</h4>
                             <div>
                                 <p className='mb-0 mt-2'>Brand*</p>
-                                <SelectBrandLoc options={['Maruthi Suzuki', 'Hyundai', 'Tata', 'Mahindra']} onChange={(e) => handleBrandChange(e)} />
+                                <SelectBrandLoc options={['Maruthi Suzuki', 'Hyundai', 'Tata', 'Mahindra']} indexString={'brand'} onChange={(e) => handleBrandChange(e)} />
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Year*</p>
@@ -212,7 +212,7 @@ function AdFormPage() {
                         <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
                             <h4>CONFIRM YOUR LOCATION</h4>
                             <p className='mb-0 mt-2'>State*</p>
-                            <SelectBrandLoc options={['Kerala', 'Tamil Nadu', 'Karnataka', 'Andra Pradesh']} onChange={(e) => handleLocationChange(e)} />
+                            <SelectBrandLoc options={['Kerala', 'Tamil Nadu', 'Karnataka', 'Andra Pradesh']} indexString={'place'} onChange={(e) => handleLocationChange(e)} />
                         </div>
                         <div className='p-4'>
                             <button type='submit' className="fs-5 fw-bold btn btn-outline-secondary text-secondary">Post now</button>

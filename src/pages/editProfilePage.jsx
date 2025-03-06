@@ -1,4 +1,6 @@
 import React from 'react';
+import InputCom from '../components/adFormComponents/inputCom';
+import SelectBrandLoc from '../components/adFormComponents/selectBrandLoc';
 
 function EditProfilePage() {
     return (
@@ -9,85 +11,90 @@ function EditProfilePage() {
                 </nav>
             </header>
 
-            <div style={{ marginTop: "12vh" }}>
-                <div className='p-3 text-center'>
-                    <h2>My Profile</h2>
-                </div>
-                <div className='d-flex justify-content-center align-items-center'>
-                    <form  className='border border-1 border-secondary border-opacity-50 w-50' style={{ minHeight: "30rem" }} >
-                        <div className='d-flex flex-column gap-3 p-4 border-bottom border-1 border-secondary border-opacity-50'>
-                            <h4>INCLUDE SOME DETAILS</h4>
-                            <div>
-                                <p className='mb-0 mt-2'>Profile pic</p>
-                                {/* <SelectBrandLoc options={['Maruthi Suzuki', 'Hyundai', 'Tata', 'Mahindra']} onChange={(e) => handleBrandChange(e)} /> */}
-                            </div>
-                            <div>
-                                <p className='mb-0 mt-2'>Name</p>
-                                {/* <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handleYearChange(e)} /> */}
-                            </div>
-                            <div>
-                                <p className='mb-0 mt-2'>Email</p>
-                                <div className='d-flex flex-row gap-1'>
-                                    {/* <RadioButtonCom value={'CNG & Hybrids'} name={'fuel'} onChange={handleFuelChange} />
-                                    <RadioButtonCom value={'Diesel'} name={'fuel'} onChange={handleFuelChange} />
-                                    <RadioButtonCom value={'Petrol'} name={'fuel'} onChange={handleFuelChange} />
-                                    <RadioButtonCom value={'Electric'} name={'fuel'} onChange={handleFuelChange} />
-                                    <RadioButtonCom value={'LPG'} name={'fuel'} onChange={handleFuelChange} /> */}
-                                </div>
-                            </div>
-                            <div>
-                                <p className='mb-0 mt-2'>Gender</p>
-                                <div className='d-flex flex-row gap-1'>
-                                    {/* <RadioButtonCom value={'Automatic'} name={'transmission'} onChange={handleTransmissionChange} />
-                                    <RadioButtonCom value={'Manual'} name={'transmission'} onChange={handleTransmissionChange} /> */}
-                                </div>
-                            </div>
-                            <div>
-                                <p className='mb-0 mt-2'>Bio</p>
-                                {/* <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handleKMDrivenChange(e)} /> */}
-                            </div>
-                            <div>
-                                <p className='mb-0 mt-2'>Mobile</p>
-                                <div className='d-flex flex-row gap-1'>
-                                    {/* <RadioButtonCom value={'1st'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
-                                    <RadioButtonCom value={'2nd'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
-                                    <RadioButtonCom value={'3rd'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
-                                    <RadioButtonCom value={'4th'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
-                                    <RadioButtonCom value={'4+'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} /> */}
-                                </div>
-                            </div>
-                        </div>
-                        <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
-                            <h4>SET A PRICE</h4>
-                            <p className='mb-0 mt-2'>Price*</p>
-                            {/* <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handlePriceChange(e)} /> */}
-                        </div>
-                        <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
-                            <h4>UPLOAD UPTO 20 PHOTOS</h4>
-                            <p className='mb-0 mt-2'>Add a photo*</p>
-                            {/* <i class="fa-solid fa-image fa-2xl"></i> */}
-                            {/* <input id='imgUploadBtn' type={'file'} accept="image/*" multiple onChange={handleFileChange} style={{ display: "none" }} /> */}
+            <div className='bg-info bg-opacity-10 pb-5' style={{ marginTop: "12vh" }}>
+                <form>
+                    <div className='d-flex justify-content-center'>
+                        <div className='mt-5 d-flex flex-column bg-white rounded-3 p-4' style={{ width: "70vw" }}>
 
-                            <div className='p-2 pt-3 d-flex flex-row flex-wrap gap-2'>
-                                <label htmlFor="imgUploadBtn" className='d-flex align-items-center justify-content-center border border-1 border-black' style={{ height: "100px", width: "100px" }}>
-                                    <i className="fa-solid fa-plus fa-2xl"></i>
-                                </label>
-                                
+
+                            <div className='border-bottom border-1 border-secondary border-opacity-50 p-4 text-center'>
+                                <h2>My Profile</h2>
                             </div>
+
+
+                            <div className='grid row border-bottom border-1 border-secondary border-opacity-50'>
+                                <div className='col-5 p-4'>
+                                    <div className='' name="image">
+                                        <div className='position-relative p-1' style={{ height: "200px", width: "200px" }}>
+                                            <div className='bg-secondary-subtle' style={{ borderRadius: "6rem" }}> {/*profile pic container */}
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+                                            </div>
+                                            <div className='position-absolute' style={{ top: "63%", left: "67%" }}>
+                                                <input id='imgUploadBtn' type={'file'} accept="image/*" multiple style={{ display: "none" }} />
+                                                <div className='p-2 pt-3 d-flex flex-row flex-wrap gap-2'>
+                                                    <label htmlFor="imgUploadBtn" className='d-flex align-items-center justify-content-center bg-white p-1 rounded-5 border border-2 border-black' style={{ height: "50px", width: "50px" }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+                                                        </svg>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='' name="address">
+                                        <p>address</p>
+                                        <p>Home:</p>
+                                        <textarea className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3 border-secondary'} />
+                                        <p>Work:</p>
+                                        <textarea className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3 border-secondary'} />
+                                    </div>
+                                </div>
+                                <div className='col-7 p-4 d-flex justify-content-center align-items-center'>
+                                    <div>
+                                        <div>
+                                            <p className='m-1'>Name</p>
+                                            <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} />
+                                        </div>
+                                        <div>
+                                            <p className='m-1'>Email</p>
+                                            <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} other={{ disabled: true }} />
+                                        </div>
+                                        <div>
+                                            <p className='m-1'>Mobile</p>
+                                            <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} />
+                                        </div>
+                                        <div>
+                                            <p className='m-1'>Gender</p>
+                                            <SelectBrandLoc indexString={'gender'} options={['Male', 'Female', 'Other']} />
+                                        </div>
+                                        <div>
+                                            <p className='m-1'>Date of birth</p>
+                                            <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} />
+                                        </div>
+                                        <div>
+                                            <p className='m-1'>Bio</p>
+                                            <textarea className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3 border-secondary'} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div className='p-4 text-center'>
+                                <button type='submit' className="fs-5 fw-bold btn btn-outline-secondary text-secondary">Save Profile</button>
+                            </div>
+
+
+
                         </div>
-                        <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
-                            <h4>CONFIRM YOUR LOCATION</h4>
-                            <p className='mb-0 mt-2'>State*</p>
-                            {/* <SelectBrandLoc options={['Kerala', 'Tamil Nadu', 'Karnataka', 'Andra Pradesh']} onChange={(e) => handleLocationChange(e)} /> */}
-                        </div>
-                        <div className='p-4'>
-                            <button type='submit' className="fs-5 fw-bold btn btn-outline-secondary text-secondary">Save Profile</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
 
-            <footer className='mt-5'>
+            <footer>
                 <div className='position-relative' style={{ minHeight: "25vh" }}>
                     <div className='position-absolute w-100 d-flex flex-row justify-content-around align-items-center p-3' style={{ minHeight: "25vh", color: "#D3D3D3", backgroundColor: "#1C1C1C" }}>
                         <div className='d-flex flex-row gap-5 align-items-center pe-5'>

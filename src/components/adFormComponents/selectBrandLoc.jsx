@@ -1,6 +1,6 @@
 import React, { useId, useState } from 'react';
 
-function SelectBrandLoc({ options, onChange }) {
+function SelectBrandLoc({ options, onChange, indexString }) {
     const id = useId()
     const [selectedValue, setSelectedValue] = useState("")
     const handleChange = (e) => {
@@ -16,7 +16,7 @@ function SelectBrandLoc({ options, onChange }) {
                 <option className='fw-normal' value="default" style={{ color: "#6C757D80" }} disabled></option>
                 {
                     options.map((item, index) => (
-                        <option key={index + "place"} className='text-black fw-normal' value={item}>{item}</option>
+                        <option key={index + indexString} className='text-black fw-normal' value={item}>{item}</option>
                     ))
                 }
             </select>
