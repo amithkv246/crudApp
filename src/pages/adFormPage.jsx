@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import InputCom from '../components/adFormComponents/inputCom'
 import SelectBrandLoc from '../components/adFormComponents/selectBrandLoc';
 import RadioButtonCom from '../components/adFormComponents/radioButtonCom';
 import { useNavigate } from 'react-router-dom';
-import { adPostAPI } from '../APIServices/allAPI\'s/adPostAPI.JS';
+import { adPostAPI } from '../APIServices/allAPIs';
 
 function AdFormPage() {
     const navigate = useNavigate()
@@ -113,10 +113,6 @@ function AdFormPage() {
     const handleLocationChange = (e) => {
         setFormData((prev) => ({ ...prev, location: e.target.value }))
     }
-
-    // useEffect(() => {
-    //     console.log("test: ", formData);
-    // }, [formData])
 
     return (
         <>

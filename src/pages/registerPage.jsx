@@ -3,7 +3,7 @@ import Heading1 from '../components/heading1';
 import FloatingInput from '../components/floatingInput';
 import Button from '../components/button';
 import { Link } from 'react-router-dom';
-import { registerAPI } from '../APIServices/allAPI\'s/registerAPI';
+import { registerAPI } from '../APIServices/allAPIs';
 
 function RegisterPage() {
 

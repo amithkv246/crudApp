@@ -10,7 +10,7 @@ export const counterSlice = createSlice({
     reducers: {
         updateIsLoggedIn: (state, action) => {
             state.isLoggedIn = action.payload
-        }
+        },
     },
 })
 

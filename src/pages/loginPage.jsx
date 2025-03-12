@@ -5,7 +5,7 @@ import Heading1 from '../components/heading1';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateIsLoggedIn } from '../redux/slice';
-import { loginAPI } from '../APIServices/allAPI\'s/loginAPI';
+import { loginAPI } from '../APIServices/allAPIs';
 
 function LoginPage() {
   const navigate = useNavigate()
