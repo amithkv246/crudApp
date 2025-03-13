@@ -3,9 +3,19 @@ import InputGroup from './inputGroup';
 import SelectCom from './select';
 import { useNavigate } from 'react-router';
 import SplitButton from './splitbutton';
+import { useDispatch } from 'react-redux';
+import { updateIsLoggedIn } from '../redux/slice';
 
-function Navbar({ onOptionClick }) {
+function Navbar() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        localStorage.removeItem('userCredentials');
+        dispatch(updateIsLoggedIn(false));
+        navigate("/");
+    };
+
     return (
         <>
             <header className='position-fixed top-0 z-1' style={{ height: "12vh", width: "100%" }} >
@@ -29,7 +39,7 @@ function Navbar({ onOptionClick }) {
                         <i className="fa-regular fa-comment fa-xl"></i>
                     </div>
                     <div>
-                        <SplitButton value={"Profile"} option={"Logout"} onOptionClick={onOptionClick} />
+                        <SplitButton value={"Profile"} option={"Logout"} onOptionClick={handleLogout} />
                     </div>
                     <div>
                         <button onClick={() => navigate("/ad_form")} className='iconButton btn btn-light btn-lg fw-bold' style={{ color: "#6C757D", border: "1px solid #800000", color: "#6C757D", backgroundColor: "#F5F5F5" }}>sell</button>
