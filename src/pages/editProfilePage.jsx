@@ -44,7 +44,9 @@ function EditProfilePage() {
         bio: "",
         homeAddress: "",
         workAddress: "",
-        dp: []
+        dp: [],
+        nameValMsg: false,
+        mobileValMsg: false
     })
 
     useEffect(() => {
@@ -74,16 +76,30 @@ function EditProfilePage() {
     };
 
     const handleNameChange = (e) => {
+        const name = e.target.value
+        const nameRegExp = /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/
+        if (!nameRegExp.test(name)) {
+            setEditForm((prev) => ({ ...prev, nameValMsg: true }))
+        } else {
+            setEditForm((prev) => ({ ...prev, nameValMsg: false }))
+        }
         setEditForm((prev) => ({
             ...prev,
-            name: e.target.value
+            name: name
         }))
     }
 
     const handleMobileChange = (e) => {
+        const mobile = e.target.value
+        const mobileRegExp = /^[6-9][0-9]{9}$/
+        if (!mobileRegExp.test(mobile)) {
+            setEditForm((prev) => ({ ...prev, mobileValMsg: true }))
+        } else {
+            setEditForm((prev) => ({ ...prev, mobileValMsg: false }))
+        }
         setEditForm((prev) => ({
             ...prev,
-            mobile: e.target.value
+            mobile: mobile
         }));
     };
 
@@ -218,6 +234,11 @@ function EditProfilePage() {
                                         <div className='mx-4'>
                                             <p className='m-0 mt-2'>Name:</p>
                                             <InputCom type={'text'} className={'form-control shadow-none p-3 rounded-3'} value={editForm.name} onChange={(e) => handleNameChange(e)} />
+                                            {
+                                                editForm.name !== "" &&
+                                                editForm.nameValMsg &&
+                                                <p className='text-danger text-center' style={{ fontSize: "small" }}>First letter must be uppercase.</p>
+                                            }
                                         </div>
                                         <div className='mx-4'>
                                             <p className='m-0 mt-4'>Email:</p>
@@ -226,6 +247,11 @@ function EditProfilePage() {
                                         <div className='mx-4'>
                                             <p className='m-0 mt-4'>Mobile:</p>
                                             <InputCom type={'text'} className={'form-control shadow-none p-3 rounded-3'} value={editForm.mobile} onChange={(e) => handleMobileChange(e)} />
+                                            {
+                                                editForm.mobile !== "" &&
+                                                editForm.mobileValMsg &&
+                                                <p className='text-danger text-center' style={{ fontSize: "small" }}>Mobile No. must contain 10 digits.</p>
+                                            }
                                         </div>
                                         <div className='mx-4'>
                                             <p className='m-0 mt-4'>Gender:</p>
