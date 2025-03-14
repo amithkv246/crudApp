@@ -7,6 +7,7 @@ import { adPostAPI } from '../APIServices/allAPIs';
 
 function AdFormPage() {
     const navigate = useNavigate()
+    const [isPosted, setIsPosted] = useState(false)
     const [formData, setFormData] = useState({
         brand: "",
         year: "",
@@ -45,73 +46,88 @@ function AdFormPage() {
 
     const fileUpload = async (event) => {
         event.preventDefault()
-        const userCredentials = JSON.parse(localStorage.getItem("userCredentials"))
-        const reqBody = new FormData()
-        reqBody.append("userId", userCredentials.userId)
-        reqBody.append("brand", formData.brand)
-        reqBody.append("year", formData.year)
-        reqBody.append("fuel", formData.fuel)
-        reqBody.append("transmission", formData.transmission);
-        reqBody.append("kmDriven", formData.kmDriven);
-        reqBody.append("noOfOwners", formData.noOfOwners);
-        reqBody.append("adTitle", formData.adTitle);
-        reqBody.append("description", formData.description);
-        reqBody.append("price", formData.price);
-        formData.images.forEach((image) => {
-            reqBody.append("images", image.file);
-        });
-        reqBody.append("location", formData.location);
+        if (Object.values(formData).some(value => value === "")) {
+            setIsPosted(true)
+            alert("Please fill all the required fields.")
+        } else {
+            const userCredentials = JSON.parse(localStorage.getItem("userCredentials"))
+            const reqBody = new FormData()
+            reqBody.append("userId", userCredentials.userId)
+            reqBody.append("brand", formData.brand)
+            reqBody.append("year", formData.year)
+            reqBody.append("fuel", formData.fuel)
+            reqBody.append("transmission", formData.transmission);
+            reqBody.append("kmDriven", formData.kmDriven);
+            reqBody.append("noOfOwners", formData.noOfOwners);
+            reqBody.append("adTitle", formData.adTitle);
+            reqBody.append("description", formData.description);
+            reqBody.append("price", formData.price);
+            formData.images.forEach((image) => {
+                reqBody.append("images", image.file);
+            });
+            reqBody.append("location", formData.location);
 
-        const reqHeader = {
-            "Content-type": "multipart/form-data",
-            "Authorization": `${userCredentials.token}`
-        }
-        try {
-            const result = await adPostAPI(reqBody, reqHeader)
-            console.log("Result : ", result);
-        } catch (err) {
-            console.error(err)
+            const reqHeader = {
+                "Content-type": "multipart/form-data",
+                "Authorization": `${userCredentials.token}`
+            }
+            try {
+                const result = await adPostAPI(reqBody, reqHeader)
+                console.log("Result : ", result);
+            } catch (err) {
+                console.error(err)
+            }
         }
     }
 
     const handleBrandChange = (e) => {
-        setFormData((prev) => ({ ...prev, brand: e.target.value }))
+        const brand = e.target.value;
+        setFormData((prev) => ({ ...prev, brand: brand }))
     }
 
     const handleYearChange = (e) => {
-        setFormData((prev) => ({ ...prev, year: e.target.value }))
+        const year = e.target.value;
+        setFormData((prev) => ({ ...prev, year: year }))
     }
 
     const handleFuelChange = (value) => {
-        setFormData((prev) => ({ ...prev, fuel: value }))
+        const fuel = value
+        setFormData((prev) => ({ ...prev, fuel: fuel }))
     }
 
     const handleTransmissionChange = (value) => {
-        setFormData((prev) => ({ ...prev, transmission: value }))
+        const transmission = value
+        setFormData((prev) => ({ ...prev, transmission: transmission }))
     }
 
     const handleKMDrivenChange = (e) => {
-        setFormData((prev) => ({ ...prev, kmDriven: e.target.value }))
+        const kmDriven = e.target.value
+        setFormData((prev) => ({ ...prev, kmDriven: kmDriven }))
     }
 
     const handleNoOfOwnersChange = (value) => {
-        setFormData((prev) => ({ ...prev, noOfOwners: value }))
+        const noOfOwners = value
+        setFormData((prev) => ({ ...prev, noOfOwners: noOfOwners }))
     }
 
     const handleAdTitleChange = (e) => {
-        setFormData((prev) => ({ ...prev, adTitle: e.target.value }))
+        const adTitle = e.target.value
+        setFormData((prev) => ({ ...prev, adTitle: adTitle }))
     }
 
     const handleDescriptionChange = (e) => {
-        setFormData((prev) => ({ ...prev, description: e.target.value }))
+        const description = e.target.value
+        setFormData((prev) => ({ ...prev, description: description }))
     }
 
     const handlePriceChange = (e) => {
-        setFormData((prev) => ({ ...prev, price: e.target.value }))
+        const price = e.target.value
+        setFormData((prev) => ({ ...prev, price: price }))
     }
 
     const handleLocationChange = (e) => {
-        setFormData((prev) => ({ ...prev, location: e.target.value }))
+        const location = e.target.value
+        setFormData((prev) => ({ ...prev, location: location }))
     }
 
     return (
@@ -133,10 +149,20 @@ function AdFormPage() {
                             <div>
                                 <p className='mb-0 mt-2'>Brand*</p>
                                 <SelectBrandLoc options={['Maruthi Suzuki', 'Hyundai', 'Tata', 'Mahindra']} indexString={'brand'} onChange={(e) => handleBrandChange(e)} />
+                                {
+                                    isPosted &&
+                                    formData.brand === "" &&
+                                    <p className='text-danger text-center mb-0'>This field is required.</p>
+                                }
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Year*</p>
                                 <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handleYearChange(e)} />
+                                {
+                                    isPosted &&
+                                    formData.year === "" &&
+                                    <p className='text-danger text-center mb-0'>This field is required.</p>
+                                }
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Fuel*</p>
@@ -147,6 +173,11 @@ function AdFormPage() {
                                     <RadioButtonCom value={'Electric'} name={'fuel'} onChange={handleFuelChange} />
                                     <RadioButtonCom value={'LPG'} name={'fuel'} onChange={handleFuelChange} />
                                 </div>
+                                {
+                                    isPosted &&
+                                    formData.fuel === "" &&
+                                    <p className='text-danger mb-0'>This field is required.</p>
+                                }
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Transmission*</p>
@@ -154,10 +185,20 @@ function AdFormPage() {
                                     <RadioButtonCom value={'Automatic'} name={'transmission'} onChange={handleTransmissionChange} />
                                     <RadioButtonCom value={'Manual'} name={'transmission'} onChange={handleTransmissionChange} />
                                 </div>
+                                {
+                                    isPosted &&
+                                    formData.transmission === "" &&
+                                    <p className='text-danger mb-0'>This field is required.</p>
+                                }
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>KM driven*</p>
                                 <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handleKMDrivenChange(e)} />
+                                {
+                                    isPosted &&
+                                    formData.kmDriven === "" &&
+                                    <p className='text-danger text-center mb-0'>This field is required.</p>
+                                }
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>No. of owners*</p>
@@ -168,27 +209,46 @@ function AdFormPage() {
                                     <RadioButtonCom value={'4th'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
                                     <RadioButtonCom value={'4+'} name={'noOfOwners'} onChange={handleNoOfOwnersChange} />
                                 </div>
+                                {
+                                    isPosted &&
+                                    formData.noOfOwners === "" &&
+                                    <p className='text-danger mb-0'>This field is required.</p>
+                                }
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Ad title*</p>
                                 <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handleAdTitleChange(e)} />
+                                {
+                                    isPosted &&
+                                    formData.adTitle === "" &&
+                                    <p className='text-danger text-center mb-0'>This field is required.</p>
+                                }
                             </div>
                             <div>
                                 <p className='mb-0 mt-2'>Description*</p>
                                 <textarea className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3 border-secondary'} onChange={(e) => handleDescriptionChange(e)} />
+                                {
+                                    isPosted &&
+                                    formData.description === "" &&
+                                    <p className='text-danger text-center mb-0'>This field is required.</p>
+                                }
                             </div>
                         </div>
                         <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
                             <h4>SET A PRICE</h4>
                             <p className='mb-0 mt-2'>Price*</p>
                             <InputCom type={'text'} className={'form-control shadow-none ps-3 pe-5 py-3 rounded-3'} onChange={(e) => handlePriceChange(e)} />
+                            {
+                                isPosted &&
+                                formData.price === "" &&
+                                <p className='text-danger text-center mb-0'>This field is required.</p>
+                            }
                         </div>
                         <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
                             <h4>UPLOAD UPTO 20 PHOTOS</h4>
                             <p className='mb-0 mt-2'>Add a photo*</p>
                             {/* <i class="fa-solid fa-image fa-2xl"></i> */}
                             <input id='imgUploadBtn' type={'file'} accept="image/*" multiple onChange={handleFileChange} style={{ display: "none" }} />
-
                             <div className='p-2 pt-3 d-flex flex-row flex-wrap gap-2'>
                                 <label htmlFor="imgUploadBtn" className='d-flex align-items-center justify-content-center border border-1 border-black' style={{ height: "100px", width: "100px" }}>
                                     <i className="fa-solid fa-plus fa-2xl"></i>
@@ -204,11 +264,21 @@ function AdFormPage() {
                                     ))
                                 }
                             </div>
+                            {
+                                isPosted &&
+                                formData.images.length === 0 &&
+                                <p className='text-danger mb-0'>Upload atleast 5 images.</p>
+                            }
                         </div>
                         <div className='p-4 border-bottom border-1 border-secondary border-opacity-50'>
                             <h4>CONFIRM YOUR LOCATION</h4>
                             <p className='mb-0 mt-2'>State*</p>
                             <SelectBrandLoc options={['Kerala', 'Tamil Nadu', 'Karnataka', 'Andra Pradesh']} indexString={'place'} onChange={(e) => handleLocationChange(e)} />
+                            {
+                                isPosted &&
+                                formData.location === "" &&
+                                <p className='text-danger text-center mb-0'>This field is required.</p>
+                            }
                         </div>
                         <div className='p-4'>
                             <button type='submit' className="fs-5 fw-bold btn btn-outline-secondary text-secondary">Post now</button>

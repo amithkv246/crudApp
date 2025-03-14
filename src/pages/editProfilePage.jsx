@@ -173,7 +173,7 @@ function EditProfilePage() {
                                 <div className='col-5 p-4 d-flex flex-column gap-5'>
                                     <div className='d-flex flex-row justify-content-center'>
                                         <div className='position-relative p-1' style={{ height: "200px", width: "200px" }}>
-                                            <div className='border border-2 border-secondary bg-secondary-subtle' style={{ borderRadius: "6rem", height: "200px", width: "200px", overflowX: 'hidden' }}> {/*profile pic container */}
+                                            <div className='border border-2 border-secondary bg-secondary-subtle' style={{ borderRadius: "6rem", height: "200px", width: "200px", overflow: 'hidden' }}> {/*profile pic container */}
                                                 {
                                                     userDetails &&
                                                         userDetails?.dp?.length === 0 ?

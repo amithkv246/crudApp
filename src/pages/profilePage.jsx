@@ -39,7 +39,7 @@ function ProfilePage() {
   return (
     <>
       <Navbar />
-      <div style={{ backgroundColor: "#fff", padding: "20vh 0vw", paddingLeft: "3rem", overflowX: "hidden" }}>
+      <div style={{ backgroundColor: "#fff", padding: "20vh 0vw", paddingLeft: "3rem", overflow: "hidden" }}>
         <div className='grid row'>
           <div className='col-3 p-4 pt-3 rounded-1' style={{ height: "70vh", backgroundColor: "#eee" }}>
             <h2 className='fw-bold mb-0'>My Profile</h2>
