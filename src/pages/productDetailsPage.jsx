@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/navbar';
 import FooterCom from '../components/footerCom';
 import CarouselCom from '../components/carouselCom';
+import { useLocation } from 'react-router-dom';
 
 function ProductDetailsPage() {
+    const location = useLocation()
+    const productDet = location.state.productDet
+    // useEffect(() => {
+    //     console.log(productDet);
+
+    // },[productDet])
     return (
         <>
             <Navbar />
@@ -13,11 +20,11 @@ function ProductDetailsPage() {
                     <div className='d-flex flex-column gap-4 col-8'>
                         <div className='d-flex flex-column bg-white rounded-2 px-4 py-3' style={{ boxShadow: "0px 0px 5px 2px #aaa" }}>
                             <span className='text-center text-primary bg-primary-subtle rounded-1 p-2' style={{ width: "140px" }}><i className="fa-solid fa-user-check me-1"></i>VERIFIED SELLER</span>
-                            <p className='fs-2 fw-bold mb-0'>Honda City ZX (2016)</p>
+                            <p className='fs-2 fw-bold mb-0'>{productDet.adTitle} ({productDet.year})</p>
                             <div className='d-flex flex-row p-1 text-secondary fw-light'>
-                                <p className='border-end border-2 pe-2 mb-0'><i className="fa-solid fa-gas-pump me-1"></i>PETROL</p>
-                                <p className='border-end border-2 pe-2 ps-2 mb-0'><i className="fa-solid fa-gauge-simple-high me-1"></i>53,000 KM</p>
-                                <p className='ps-2 mb-0'><i className="fa-solid fa-gears me-1"></i>AUTOMATIC</p>
+                                <p className='border-end border-2 pe-2 mb-0'><i className="fa-solid fa-gas-pump me-1"></i>{productDet.fuel}</p>
+                                <p className='border-end border-2 pe-2 ps-2 mb-0'><i className="fa-solid fa-gauge-simple-high me-1"></i>{productDet.kmDriven} KM</p>
+                                <p className='ps-2 mb-0'><i className="fa-solid fa-gears me-1"></i>{productDet.transmission}</p>
                             </div>
                         </div>
                         <div className='d-flex flex-column bg-white rounded-2 ' style={{ boxShadow: "0px 0px 5px 2px #aaa" }}>
@@ -25,18 +32,18 @@ function ProductDetailsPage() {
                             <div className='d-flex flex-row justify-content-start ps-4 pb-1 gap-5 fs-5'>
                                 <p className='d-flex flex-row align-items-center gap-3 me-5'>
                                     <i className="fa-regular fa-user fa-xl"></i>
-                                    <span><span className='text-secondary fw-light fs-6'>Owner</span><br />4th</span>
+                                    <span><span className='text-secondary fw-light fs-6'>Owner</span><br />{productDet.noOfOwners}</span>
                                 </p>
                                 <p className='d-flex flex-row align-items-center gap-2 me-5'>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6" height={"35"} width={"35"}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                                     </svg>
-                                    <span><span className='text-secondary fw-light fs-6'>Location</span><br />Vikaspuri, Delhi</span>
+                                    <span><span className='text-secondary fw-light fs-6'>Location</span><br />{productDet.location}</span>
                                 </p>
                                 <p className='d-flex flex-row align-items-center gap-3'>
                                     <i className="fa-regular fa-calendar fa-xl"></i>
-                                    <span><span className='text-secondary fw-light fs-6'>Posting date</span><br />25-JAN-25</span>
+                                    <span><span className='text-secondary fw-light fs-6'>Posting date</span><br />date</span>
                                 </p>
                             </div>
                         </div>

@@ -33,7 +33,7 @@ function HomePage() {
             allAds &&
               allAds.length > 0 ?
               allAds.map((item, index) => (
-                <CardCom key={index + "ads"} onClick={() => navigate("/product_details")} ad={item} />
+                <CardCom key={index + "ads"} onClick={() => navigate("/product_details", { state: { productDet: allAds[index] } })} ad={item} />
               ))
               :
               (
